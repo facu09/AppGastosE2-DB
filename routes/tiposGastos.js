@@ -1,13 +1,13 @@
 const express = require("express");
-const usersController = require("../controllers/users");
+const tiposGastosController = require("../controllers/tiposGastos");
 const router = express.Router();
 
 // Establecido por defecto x el app.js:  
 //  const usersRouter = require("./routes/users") 
-//        -->  /api/users
-router.post("/", usersController.createUser);
+//        -->  /api/tipos
+router.post("/", tiposGastosController.createTipoGasto);
 
-// otras rutas ..
+// otras rutas de tiposGastos ..
 
 
 
