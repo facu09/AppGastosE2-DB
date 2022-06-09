@@ -35,14 +35,11 @@ const createUser = async (req, res, next) => {
     try {
         // Salvando la nueva entidad
         newUser2 = await newUser.save();
-        res.send(newMovie2);
+        res.send(newUser2);
       } catch (err) {
         res.statusCode = 500;
         res.send(err);
       }
-
-    res.statusCode = 201;
-    res.send(newUser);
 
 };
 

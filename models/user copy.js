@@ -15,15 +15,17 @@ class User {
   async save() {
     try {
       console.log (this.email + ", " + this.name + ", " + this.password + ", " + this.role )
+     
       await prisma.User.create({
         data: {
-          email: this.email,
-          name: this.name,
-          password: this.password,
-          role: this.role,
+          email: "'" + this.email + "'",
+          name: "'" + this.name + "'",
+          role: "'" + this.role + "'",
+          password: "'" + this.password + "'",
+          password: "'" + this.password + "'",
         },
       });
-      console.log (this)
+
       return this;
     
     } catch (err) {
