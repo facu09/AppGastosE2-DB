@@ -15,15 +15,29 @@ const createUser = async (req, res, next) => {
         res.send("Email cannot be empty");
         return;
     }
+    if (!nameIsValid(name)) {
+        res.statusCode = 400;
+        res.send("Name cannot be empty");
+        return;
+    };
+    if (!passwordIsValid(password)) {
+        res.statusCode = 400;
+        res.send("Password cannot be empty")
+        return
+    }
     if (!roleIsValid(role)) {
         res.statusCode = 400;
         res.send("Role is not valid");
         return;
-    }
-    //faltan validaciones
+    };
+    if (await userAlreadyExists(email)) { 
+        res.statusCode = 400;
+        res.send("User with this eamil already exists.");
+        return;
+    };
 
   
-    // Creo la entidad
+    // Si llego acá es que valido bien ==> Creo la entidad
     let newUser = new User(
         req.body.email,
         req.body.name,
@@ -31,32 +45,48 @@ const createUser = async (req, res, next) => {
         req.body.role, 
     );
 
-    //HASTA ACÁ ANDUVO ESTAPROBADO
     try {
         // Salvando la nueva entidad
         newUser2 = await newUser.save();
-        res.send(newMovie2);
+        res.send(newUser2);
       } catch (err) {
         res.statusCode = 500;
         res.send(err);
       }
 
-    res.statusCode = 201;
-    res.send(newUser);
-
 };
 
+const findUserByEmail = async (req, res, next) => {
+    if (req.query.email === "") {
+        res.statusCode = 400;
+        res.send("Eamil cannot be empty")
+    }
+    const users = await User.findByEmail(req.query.email);
+    console.log("Response user", users);
+    res.send(users)
+}
 
 const emailIsValid = (email) => {
     return email !== "";
 };
-
+const nameIsValid = (name) => {
+    return name !==""; 
+}
+const passwordIsValid = (password) =>  {
+    return password !== "";
+}
 const roleIsValid = (role) => {
     return ( role !== "" &&
             (role === "USER" || role === "ADMIN") )
 };
 
+const userAlreadyExists = async (email) => {
+    const userByEamil = await User.findByEmail(email);
+    // console.log("user encontrado:", userByEamil)
+    return userByEamil ;
+};
 
 module.exports = {
-    createUser
-}
+    createUser,
+    findUserByEmail,
+};
