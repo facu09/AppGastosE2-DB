@@ -11,7 +11,7 @@ class User {
     this.role = role ? role : "USER";
   }
 
-  // //Aca iria el alta en la deb
+  // //Aca iria el Alta en DB
   async save() {
     try {
       console.log (this.email + ", " + this.name + ", " + this.password + ", " + this.role )
@@ -29,6 +29,23 @@ class User {
     } catch (err) {
       return err;
     }
+  }
+
+  static async findByEmail(email) {
+    try {
+      // console.log("el mail recibido en findByEmail", email)
+      const userfinded = await prisma.User.findUnique({
+        where: {
+          email: email,
+        },
+      })
+      // console.log("el userfinded:" ,userfinded)
+      return userfinded;
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
+    }   
+
   }
 
 }
