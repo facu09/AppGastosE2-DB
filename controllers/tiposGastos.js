@@ -11,11 +11,13 @@ const createTipoGasto = async (req, res, next) => {
     }
     // falta otras validarciones
     console.log("paso por aca antes de crear newinstance")
-   // Creo la entidad
+   
+   
+    // Creo la entidad
     let newTipoGasto = new TipoGasto(
         req.body.nomTipoGasto
     );
-    console.log("paso por aca despu de crear newinstance")
+    console.log("paso por aca despues de crear new instance")
     try {
         // Salvando la nueva entidad
         newTipoGasto2 = await newTipoGasto.save();
@@ -27,11 +29,59 @@ const createTipoGasto = async (req, res, next) => {
 
 };
 
+const getAllTiposGasto = async (req, res, next) => {
+    const tiposGasto  = await TipoGasto.getAllTiposGasto();
+    // console.log("Response user", users);
+    res.send(tiposGasto)
+}
+
+const updateById = async (req, res, next) => {
+    
+    const nomTipoGasto = req.body.nomTipoGasto;
+    console.log("---> entro al updataById");
+    console.log("id: " , req.params.id, ", nomTipoGasto: ", nomTipoGasto)
+
+    if (req.params.id === "") {
+        res.statusCode = 400;
+        res.send("Id cannot be empty");
+    }
+    if (await idDosentExist(req.params.id)) { 
+        res.statusCode = 400;
+        res.send("Tipo de Gasto with this id dosen't exist.");
+        return;
+    };
+    if (!nomTipoGastoIsValid(nomTipoGasto)) {
+        res.statusCode = 400;
+        res.send("Name cannot be empty");
+        return;
+    };
+
+    const tipoGastoUpdated = await TipoGasto.uptadeById(req.params.id, nomTipoGasto );
+
+    res.send(tipoGastoUpdated);  
+}
+
+
+// Validaciones
+
+const idDosentExist = async (id) => {
+    const tipoGastoById = await TipoGasto.findById(id);
+    console.log ("Encontrado ", tipoGastoById)
+    if (tipoGastoById) {
+        return false
+    }else {
+        return true
+    } 
+}
 
 const nomTipoGastoIsValid = (nomTipoGasto) => {
     return nomTipoGasto !== "";
 };
 
+
+
 module.exports = {
-    createTipoGasto
-}
+    createTipoGasto,
+    getAllTiposGasto,
+    updateById, 
+};
