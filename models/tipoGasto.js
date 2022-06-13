@@ -24,7 +24,52 @@ class TipoGasto {
     }
   }
 
-  
+  static async findById(id) {
+    console.log("==> findById --> ", id)
+    try {
+      // console.log("el mail recibido en findByEmail", email)
+      const tipoGastoFinded = await prisma.TipoGasto.findUnique({
+        where: {
+          id: parseInt(id,10),
+        },
+      })
+      // console.log("el userfinded:" ,userfinded)
+      return tipoGastoFinded;
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
+    }   
+  }
+
+  static async getAllTiposGasto() {
+    try {
+        const allTiposGasto = await prisma.TipoGasto.findMany()
+        return allTiposGasto
+      } catch (error) {
+        console.log(error);
+        throw new Error(error);
+      }   
+    }
+
+    static async uptadeById (id, nomTipoGasto) {
+        try {
+          const updatedTipoGasto = await prisma.TipoGasto.update({
+            where: {
+              id: parseInt(id,10),
+            },
+            data: {
+              nomTipoGasto: nomTipoGasto, 
+            },
+          })
+          // console.log (updatedUser)
+          return updatedTipoGasto
+      
+        } catch (error) {
+          console.log(error);
+          throw new Error(error);
+        }   
+      }
+
 }
 
 

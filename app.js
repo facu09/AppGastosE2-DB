@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 //ataja todas las rutas que arranquen con "api/user" --> y las tira al /routes/users.js
 app.use("/api/users", usersRouter);
 
-//ataja todas las rutas que arranquen con "api/tipoGastos" --> y las tira al /routes/tipoGastos.js
+//ataja todas las rutas que arranquen con "api/tiposGasto" --> y las tira al /routes/tiposGastos.js
 app.use("/api/tiposGastos", tiposGastosRouter);
 
 //ataja todas las rutas que arranquen con "api/gastos" --> y las tira al /routes/gastos.js
