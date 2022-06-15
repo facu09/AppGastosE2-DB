@@ -8,6 +8,11 @@ const router = express.Router();
 //        -->  /api/gastos
 router.post("/", gastosController.createGasto);
 
+//  app.use("/api/gastos", gastosRouter);
+//        -->  /api/gastos
+router.get("/", gastosController.getAllGastos);
+
+
 // otras rutas ..
 
 

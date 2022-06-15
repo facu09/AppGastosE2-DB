@@ -11,7 +11,7 @@ class User {
     this.role = role ? role : "USER";
   }
 
-  // //Aca iria el Alta en DB
+  // Grava la Entidad en db
   async save() {
     try {
       console.log (this.email + ", " + this.name + ", " + this.password + ", " + this.role )
@@ -47,51 +47,51 @@ class User {
     }   
   }
 
-static async getAllUsers (){
-  try {
-    const allUsers = await prisma.User.findMany()
-    return allUsers
-  } catch (error) {
-    console.log(error);
-    throw new Error(error);
-  }   
-}
+  static async getAllUsers (){
+    try {
+      const allUsers = await prisma.User.findMany()
+      return allUsers
+    } catch (error) {
+      console.log(error);
+      throw new Error(error);
+    }   
+  }
 
-static async uptadeByEmail (email, name, password, role) {
-  try {
-    const updatedUser = await prisma.User.update({
-      where: {
-        email: email,
-      },
-      data: {
-        name: name, 
-        password: password,
-        role, role,
-      },
-    })
-    // console.log (updatedUser)
-    return updatedUser
+  static async uptadeByEmail (email, name, password, role) {
+    try {
+      const updatedUser = await prisma.User.update({
+        where: {
+          email: email,
+        },
+        data: {
+          name: name, 
+          password: password,
+          role, role,
+        },
+      })
+      // console.log (updatedUser)
+      return updatedUser
 
-  } catch (error) {
-    console.log(error);
-    throw new Error(error);
-  }   
-}
+    } catch (error) {
+      console.log(error);
+      throw new Error(error);
+    }   
+  }
 
-static async deleteByEmail (email) {
-  try {
-    const deletedUser = await prisma.User.delete({
-      where: {
-        email: email,
-      },
-    })
-    return deletedUser
-    
-  } catch (error) {
-    console.log(error);
-    throw new Error(error);
-  }   
-}
+  static async deleteByEmail (email) {
+    try {
+      const deletedUser = await prisma.User.delete({
+        where: {
+          email: email,
+        },
+      })
+      return deletedUser
+
+    } catch (error) {
+      console.log(error);
+      throw new Error(error);
+    }   
+  }
 
 }//cirra el User Class
 
