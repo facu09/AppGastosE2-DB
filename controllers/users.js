@@ -54,7 +54,6 @@ const createUser = async (req, res, next) => {
         res.statusCode = 500;
         res.send(err);
       }
-
 };
 
 const getAllUsers = async (req, res, next) => {
