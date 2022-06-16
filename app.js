@@ -6,7 +6,9 @@ const tiposGastosRouter = require("./routes/tiposGastos");
 const gastosRouter = require("./routes/gastos");
 const consultasRouter = require("./routes/consultas");
 
-const PORT = 3000;
+// const PORT = 3000;
+// Para q funque en Heroku
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 app.use(bodyParser.json());
