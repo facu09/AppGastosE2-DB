@@ -47,6 +47,22 @@ class User {
     }   
   }
 
+  static async findByIdUser(id) {
+    try {
+      // console.log("el mail recibido en findByEmail", email)
+      const userfinded = await prisma.User.findUnique({
+        where: {
+          id: +id,
+        },
+      })
+      // console.log("el userfinded:" ,userfinded)
+      return userfinded;
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
+    }   
+  }
+
   static async getAllUsers (){
     try {
       const allUsers = await prisma.User.findMany()
