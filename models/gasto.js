@@ -47,6 +47,34 @@ class Gasto {
     }   
   }
 
+  static async GastoAlreadyExist (nomGasto,
+    importe, fechaGasto, idTipoGasto, idUser) {
+    console.log("nomgasto ==>", nomGasto, " id Us:", idUser )
+    try {
+      const gastosFinded = await prisma.Gastos.findMany({
+        where: {
+          nomGasto: nomGasto,
+          importe: importe,
+          fechaGasto: new Date(fechaGasto),
+          tipoGastoId: idTipoGasto,
+          userId: idUser,
+        },
+      })
+      console.log("gastos finded ", gastosFinded.length, "; " ,gastosFinded )
+      if (gastosFinded.length > 0) {
+        console.log ("uuuuuuuu Sale por true hay")
+        return true
+      } else {
+        console.log ("uuuuuuuu Sale por faseeeee no hay")
+        return false
+      }
+      
+    } catch (error) {
+      console.log(error);
+      throw new Error(error);
+    }   
+  }
+
   static async getAllGastos (){
     try {
       const allGastos = await prisma.Gastos.findMany()

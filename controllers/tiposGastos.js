@@ -33,7 +33,7 @@ const getAllTiposGasto = async (req, res, next) => {
     const tiposGasto  = await TipoGasto.getAllTiposGasto();
     // console.log("Response user", users);
     res.send(tiposGasto)
-}
+};
 
 const updateById = async (req, res, next) => {
     

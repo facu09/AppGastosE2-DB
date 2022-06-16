@@ -5,11 +5,11 @@ const router = express.Router();
 // Establecido por defecto x el app.js:  
 //  const usersRouter = require("./routes/gastos") 
 //  app.use("/api/gastos", gastosRouter);
-//        -->  /api/gastos
+//--> /api/gastos
 router.post("/", gastosController.createGasto);
 
 //  app.use("/api/gastos", gastosRouter);
-//        -->  /api/gastos
+//      -->  /api/gastos
 router.get("/", gastosController.getAllGastos);
 
 

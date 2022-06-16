@@ -3,7 +3,8 @@ const bodyParser= require("body-parser");
 
 const usersRouter = require("./routes/users")
 const tiposGastosRouter = require("./routes/tiposGastos");
-const gastosRouter = require("./routes/gastos")
+const gastosRouter = require("./routes/gastos");
+const consutasRouter = require("./routes/consultas");
 
 const PORT = 3000;
 
@@ -19,6 +20,8 @@ app.use("/api/tiposGastos", tiposGastosRouter);
 //ataja todas las rutas que arranquen con "api/gastos" --> y las tira al /routes/gastos.js
 app.use("/api/gastos", gastosRouter);
 
+//ataja todas las rutas que arranquen con "api/consultas" --> y las tira al /routes/consultas.js
+app.use("/api/consultas", consutasRouter);
 
 app.listen(PORT, () => {
     console.log(`Listening on ${PORT} Bro`);
