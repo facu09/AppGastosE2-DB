@@ -47,8 +47,9 @@ const getPromedioDeAllGastos = async () => {
               importe: true,
             },
         })
-        console.log('Average age:' + aggregations._avg.importe)
-        return {"El Gasto Promedio del período es:": parseInt(aggregations._avg.importe)}
+        lsTotConFormato = Intl.NumberFormat('en-EN', { style: 'currency', currency: 'ARG' }).format(aggregations._avg.importe)
+        console.log('Average age:' + lsTotConFormato)
+        return {"El Gasto Promedio del período es: ": lsTotConFormato}
     } catch (error) {
         console.log(error);
         throw new Error(error);
@@ -62,8 +63,11 @@ const getSumaDeAllGastos = async () => {
               importe: true,
             },
         })
-        console.log('Suma de Gastos:' + aggregations._sum.importe)
-        return {"La Sumar Total de Gastos del período es:": parseInt(aggregations._sum.importe)}
+        console.log('Suma de Gastos: ' + aggregations._sum.importe)
+        // const liSumTotGastos= parseInt(aggregations._sum.importe);
+        lsTotConFormato = Intl.NumberFormat('en-EN', { style: 'currency', currency: 'ARG' }).format(aggregations._sum.importe)
+        console.log('Suma de Gastos: ' + lsTotConFormato)
+        return {"La Sumar Total de Gastos del período es: ":    lsTotConFormato}
     } catch (error) {
         console.log(error);
         throw new Error(error);
@@ -109,8 +113,10 @@ const getMayorDeAllGastos = async () => {
               importe: true,
             },
         })
-        console.log('El Mayor Gastos:' + aggregations._max.importe)
-        return {"El Mayor de los Gastos del período es:": parseInt(aggregations._max.importe)}
+
+        lsTotConFormato = Intl.NumberFormat('en-EN', { style: 'currency', currency: 'ARG' }).format(aggregations._max.importe)
+        console.log('El Mayor Gastos: ' + lsTotConFormato)
+        return {"El Mayor de los Gastos del período es: ": lsTotConFormato}
     } catch (error) {
         console.log(error);
         throw new Error(error);
@@ -125,8 +131,9 @@ const getMenorDeAllGastos = async () => {
             },
            
         })
-        console.log('El Menor de los Gastos del Período:' + aggregations._min.importe)
-        return {"El Menor de los Gastos del período es:": parseInt(aggregations._min.importe)}
+        lsTotConFormato = Intl.NumberFormat('en-EN', { style: 'currency', currency: 'ARG' }).format(aggregations._min.importe)
+        console.log('El Menor de los Gastos del Período: ' +lsTotConFormato)
+        return {"El Menor de los Gastos del período es: ": lsTotConFormato}
     } catch (error) {
         console.log(error);
         throw new Error(error);
