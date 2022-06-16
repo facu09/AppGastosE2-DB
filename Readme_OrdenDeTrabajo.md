@@ -2,12 +2,12 @@ MVP:
 .1. Definir modelo de datos (sechema.prisma) cuales entidades y cómo se relacionan
 .2. Crear infra (cuentaheoku, aplicación en heroku, crear db en heroku  db shadow en heroku)
       Desde heroku client:
-1 comando, crea la app en heroku
-2do comando, crea la db
+1 comando, crea la app en heroku (lo hice por interfaz grafica)
+2do comando, crea la db (manual/)
 3ro para correr la migracion de prisma, prisma se crea como una base temporal , se denfine 
 	en el .env la database_shadow	
 
-.2.1. conectar su app a las DB MOIFICAND el .env
+.2.1. conectar al app a las DB MOIFICAND el .env
 .3. Correr migraciones (npex prisma migrate dev --name nombremigracion)
 .4. crear conexion a prisma (ver como hacemo el new PrismaCliete())
 .5. Modificar el modelo guardado de datos para usar la DB en vez de filesystem
@@ -20,7 +20,10 @@ Crear API:
 	Para impactarle con Postman
 .8. crear los controllers para cada comando/ruta
 	llamamos las funciones que usamos en el paso 5
-App Version 1 con API
+.9. Armar las cosultas en /models/consultas.js
+. --> App Version 1 con API
 --------------------------------------------------------------------------------------
-Fin
+10. Subir la App a Heroku y que quede correindo
+11. Exportar Coleccion de Postman y probarlo
+. Fin
 --------------------------------------------------------------------------------------
