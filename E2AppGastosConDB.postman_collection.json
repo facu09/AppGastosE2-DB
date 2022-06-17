@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"roberto5@gmail.com\",\r\n    \"name\": \"Roberto Cinco García\",\r\n    \"password\": \"pass12345\",\r\n    \"role\": \"USER\"\r\n}",
+							"raw": "{\r\n    \"email\": \"roberto9@gmail.com\",\r\n    \"name\": \"Roberto Nueve García\",\r\n    \"password\": \"pass12345\",\r\n    \"role\": \"USER\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,14 +24,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/users",
-							"protocol": "http",
+							"raw": "{{url}}/users",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"users"
 							]
 						}
@@ -44,14 +41,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/users",
-							"protocol": "http",
+							"raw": "{{url}}/users",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"users"
 							]
 						}
@@ -76,25 +70,18 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/users/search?email=roberto5@gmail.com&name=roberto",
-							"protocol": "http",
+							"raw": "{{url}}/users/search?email=roberto4@gmail.com",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"users",
 								"search"
 							],
 							"query": [
 								{
 									"key": "email",
-									"value": "roberto5@gmail.com"
-								},
-								{
-									"key": "name",
-									"value": "roberto"
+									"value": "roberto4@gmail.com"
 								}
 							]
 						}
@@ -116,14 +103,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/users/email/roberto18@gmail.com",
-							"protocol": "http",
+							"raw": "{{url}}/users/email/roberto18@gmail.com",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"users",
 								"email",
 								"roberto18@gmail.com"
@@ -138,17 +122,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/users/email/roberto9@gmail.com",
-							"protocol": "http",
+							"raw": "{{url}}/users/email/roberto11@gmail.com",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"users",
 								"email",
-								"roberto9@gmail.com"
+								"roberto11@gmail.com"
 							]
 						}
 					},
@@ -166,7 +147,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nomTipoGasto\": \"Indumentaria\"\r\n}",
+							"raw": "{\r\n    \"nomTipoGasto\": \"sopa\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -174,14 +155,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/tiposGastos",
-							"protocol": "http",
+							"raw": "{{url}}/tiposGastos",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"tiposGastos"
 							]
 						}
@@ -194,14 +172,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/tiposGastos",
-							"protocol": "http",
+							"raw": "{{url}}/tiposGastos",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"tiposGastos"
 							]
 						}
@@ -223,17 +198,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/tiposGastos/id/4",
-							"protocol": "http",
+							"raw": "{{url}}/tiposGastos/id/12",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"tiposGastos",
 								"id",
-								"4"
+								"12"
 							]
 						}
 					},
@@ -251,7 +223,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nomGasto\": \"Cable + Internet\",\r\n    \"importe\": 2350,\r\n    \"fechaGasto\": \"05/03/2022\",\r\n    \"idTipoGasto\": 1,\r\n    \"UserId\": 1\r\n}",
+							"raw": "{\r\n    \"nomGasto\": \"Dif Cable e Internet\",\r\n    \"importe\": 10,\r\n    \"fechaGasto\": \"05/13/2022\",\r\n    \"idTipoGasto\": 1,\r\n    \"UserId\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -259,14 +231,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/gastos",
-							"protocol": "http",
+							"raw": "{{url}}/gastos",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"gastos"
 							]
 						}
@@ -284,14 +253,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/consultas/allGastos",
-							"protocol": "http",
+							"raw": "{{url}}/consultas/allGastos",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"consultas",
 								"allGastos"
 							]
@@ -305,14 +271,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/consultas/allGastosOrderAscImporte",
-							"protocol": "http",
+							"raw": "{{url}}/consultas/allGastosOrderAscImporte",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"consultas",
 								"allGastosOrderAscImporte"
 							]
@@ -326,14 +289,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/consultas/allGastosOrderAscFecha",
-							"protocol": "http",
+							"raw": "{{url}}/consultas/allGastosOrderAscFecha",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"consultas",
 								"allGastosOrderAscFecha"
 							]
@@ -347,14 +307,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/consultas/promedioDeAllGastos",
-							"protocol": "http",
+							"raw": "{{url}}/consultas/promedioDeAllGastos",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"consultas",
 								"promedioDeAllGastos"
 							]
@@ -368,14 +325,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/consultas/sumaDeAllGastos",
-							"protocol": "http",
+							"raw": "{{url}}/consultas/sumaDeAllGastos",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"consultas",
 								"sumaDeAllGastos"
 							]
@@ -389,14 +343,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/consultas/sumaDeGastosPorUsuario",
-							"protocol": "http",
+							"raw": "{{url}}/consultas/sumaDeGastosPorUsuario",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"consultas",
 								"sumaDeGastosPorUsuario"
 							]
@@ -410,16 +361,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/consultas/sumaDeGastosPorUsuario",
-							"protocol": "http",
+							"raw": "{{url}}/consultas/sumaDeGastosPorTipoGasto",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"consultas",
-								"sumaDeGastosPorUsuario"
+								"sumaDeGastosPorTipoGasto"
 							]
 						}
 					},
@@ -431,14 +379,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/consultas/mayorDeAllGastos",
-							"protocol": "http",
+							"raw": "{{url}}/consultas/mayorDeAllGastos",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"consultas",
 								"mayorDeAllGastos"
 							]
@@ -452,14 +397,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/consultas/menorDeAllGastos",
-							"protocol": "http",
+							"raw": "{{url}}/consultas/menorDeAllGastos",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"consultas",
 								"menorDeAllGastos"
 							]
@@ -468,6 +410,33 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://app-gastos-e2-db.herokuapp.com/api",
+			"type": "string"
 		}
 	]
 }
