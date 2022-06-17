@@ -2,31 +2,61 @@ const prisma = require("../utils/client");
 
 const { v4: uuidv4 } = require("uuid");
 
+  //Se rompió el autoincremental del Id de Gastos (por metar registros desde odbc de MsAccess)
+  //Obtener el Próximo id Gasto = Mayor + 1
+  const getNextId_NewGastos = async () => {
+    try {
+        const aggregations = await prisma.Gastos.aggregate({
+            _max: {
+              id: true,
+            },
+        })
+  
+        console.log('El Mayor id de  Gastos: ', aggregations._max.id, " elproximo es: ", (aggregations._max.id + 1 ));
+        return (aggregations._max.id + 1 );
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
+    }   
+  }
+
 class Gasto {
-  constructor(nomGasto, importe, fechaGasto, idTipoGasto, idUser, id) {
-    this.id = id ? id : uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
+  constructor  (nomGasto, importe, fechaGasto, idTipoGasto, idUser, id) {
+   // this.id = id ? id : uuidv4(); // ⇨    '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
     this.nomGasto = nomGasto;
     this.importe = importe;
     this.fechaGasto = fechaGasto ? fechaGasto : now();
     this.idTipoGasto = idTipoGasto; 
     this.idUser = idUser;   
+
+    console.log ("Constructor IdGasto: ", this.id)
   }
 
+  
   async save() {
     try {
-      const newGasto = await prisma.Gastos.create({
+      console.log ("Del Save: " + this.nomGasto + ", " + this.importe + ", " + this.fechaGasto + ", " + this.idUser );
+    
+      //busco ultimo id y le sumo 1
+      const liProxId = await getNextId_NewGastos() 
+      console.log("Proximo", liProxId)
+     
+      const newGsto =  await prisma.Gastos.create({
         data: {
+          id: liProxId,
           nomGasto: this.nomGasto,
-          importe: +this.importe,
+          importe: this.importe,
           fechaGasto: new Date(this.fechaGasto),
-          tipoGastoId: +this.idTipoGasto,
-          userId: +this.idUser,
+          tipoGastoId: this.idTipoGasto,
+          userId: this.idUser,
         },
       });
-      // console.log (newGasto)
-      return newGasto;
+      console.log ("Desp de guardar: ");
+      console.log (newGsto)
+      return newGsto;
     
     } catch (err) {
+      console.log(err)
       return err;
     }
   }
@@ -84,6 +114,8 @@ class Gasto {
       throw new Error(error);
     }   
   }
+
+
 
 }//cirra el User Class
 

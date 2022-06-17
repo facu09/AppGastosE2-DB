@@ -47,9 +47,9 @@ const createGasto = async (req, res, next) => {
         req.body.importe,
         req.body.fechaGasto, 
         req.body.idTipoGasto,
-        req.body.UserId
+        req.body.UserId,
     );
-
+    console.log ("despues de new en cotroller ", newGasto)
     try {
         // Salvando la nueva entidad
         newGasto2 = await newGasto.save();
