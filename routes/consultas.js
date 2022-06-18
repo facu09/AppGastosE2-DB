@@ -21,9 +21,14 @@ router.get("/sumaDeGastosPorUsuario", cnsController.getSumaDeGastosPorUsuario);
 
 router.get("/sumaDeGastosPorTipoGasto", cnsController.getSumaDeGastosPorTipoGasto);
 
+router.get("/sumaDeGastosPorTipoGastoSql", cnsController.sumaDeGastosPorTipoGastoSql
+);
+
 router.get("/mayorDeAllGastos", cnsController.getMayorDeAllGastos);
 
 router.get("/menorDeAllGastos", cnsController.getMenorDeAllGastos);
+
+
 
 // otras rutas ..
 

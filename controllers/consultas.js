@@ -1,11 +1,27 @@
 //Controlador Users - Independiente de con que DB esté hecho
 const Cns = require("../models/consulta");  // este es el que impacta y conoce la DB
+const User = require("../models/user"); // para buscar si existe el email para algunas consultas
 
 
 const getAllGastos = async (req, res, next) => {
-    const allGastos = await Cns.getAllGastos();
-    res.send(allGastos)
+    console.log ("Del consultas.controllers: ", req.query.email)
+    if (req.query.email) {
+        if (await userDosentExist(req.query.email)) { 
+            res.statusCode = 400;
+            res.send("User with this eamil dosen't exist.");
+            return;
+        // Si el mail existe    
+        } else {
+            const gastosDelUs = await Cns.getAllGastos(req.query.email);
+            res.send(gastosDelUs)
+        }
+    //sino tiene mail --> trae todos los gastos
+    } else{
+        const allGastos = await Cns.getAllGastos();
+        res.send(allGastos)
+    }
 }
+    
 const getAllGastosOrderAscByImpote = async (req, res, next) => {
     const allGastosOrdered = await Cns.getAllGastosOrderAscByImpote();
    
@@ -32,6 +48,12 @@ const getSumaDeGastosPorTipoGasto = async (req, res, next) => {
     const SumaGastosProT = await Cns.getSumaDeGastosPorTipoGasto();
     res.status(200).send(SumaGastosProT)
 }
+const sumaDeGastosPorTipoGastoSql = async (req, res, next) => {
+    const SumaGastosProT = await Cns.getSumaDeGastosPorTipoGastoSql();
+    res.status(200).send(SumaGastosProT)
+}
+
+
 const getMayorDeAllGastos = async (req, res, next) => {
     const mayorOfAll = await Cns.getMayorDeAllGastos();
     res.send(mayorOfAll)
@@ -83,6 +105,19 @@ const IdUserIsValid = async (idUser) => {
 }
 
 
+// Validaciones
+const userDosentExist = async (email) => {
+    console.log ("---> Entro al userDosentExist")
+    const userByEmail = await User.findByEmail(email);
+    console.log(userByEmail) ;
+    if (userByEmail) {
+        return false
+    }else {
+        return true
+    } 
+}
+
+
 module.exports = {
     getAllGastos,
     getAllGastosOrderAscByImpote,
@@ -91,6 +126,7 @@ module.exports = {
     getSumaDeAllGastos,
     getSumaDeGastosPorUsuario,
     getSumaDeGastosPorTipoGasto,
+    sumaDeGastosPorTipoGastoSql,
     getMayorDeAllGastos,
     getMenorDeAllGastos,
 }
