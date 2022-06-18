@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "e4e34f2f-14c8-4e76-82ea-50fc5596bb23",
-		"name": "E2AppGastosConDB",
+		"name": "E2AppGastosConDB Local",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "17226216"
 	},
@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"roberto9@gmail.com\",\r\n    \"name\": \"Roberto Nueve García\",\r\n    \"password\": \"pass12345\",\r\n    \"role\": \"USER\"\r\n}",
+							"raw": "{\r\n    \"email\": \"roberto11@gmail.com\",\r\n    \"name\": \"Roberto 11 García\",\r\n    \"password\": \"pass12345\",\r\n    \"role\": \"USER\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -248,7 +248,7 @@
 			"name": "Consultas",
 			"item": [
 				{
-					"name": "All Gastos",
+					"name": "All Gastos or By Email",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -356,7 +356,25 @@
 					"response": []
 				},
 				{
-					"name": "Suma de All Gastos  Por TipoGasto",
+					"name": "Suma de All Gastos  Por TipoGasto Prisma",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/consultas/sumaDeGastosPorTipoGasto",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"consultas",
+								"sumaDeGastosPorTipoGasto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Suma de All Gastos  Por TipoGasto Sql",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -435,7 +453,7 @@
 	"variable": [
 		{
 			"key": "url",
-			"value": "https://app-gastos-e2-db.herokuapp.com/api",
+			"value": "http://localhost:3000/api",
 			"type": "string"
 		}
 	]
