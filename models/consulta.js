@@ -1,11 +1,45 @@
 const prisma = require("../utils/client");
+const pool = require("../utils/clientPostgreSQL")
+
 
 const { v4: uuidv4 } = require("uuid");
 
-const getAllGastos = async () => {
+const getAllGastos = async (psEmail) => {
     try {
-        const allGastos = await prisma.Gastos.findMany()
-        return allGastos
+        //-->  con prisma --> andando ok PERO sin filtro por mail
+        // const allGastos = await prisma.Gastos.findMany()
+        // return allGastos
+
+        //con SQL DIRECTO  FALTA VER COMO SE ARMA LA CONEXION
+        const resultados = await pool.query('SELECT * FROM Public."Gastos" as G ');
+        // const resultados = await pool.query('SELECT Public."Gastos".id FROM Public."Gastos" ');
+        // const resultados = await pool.query('SELECT GT.id,  GT.*  FROM Public."Gastos" as GT ');
+
+        lsWhere = '';
+        console.log("Del getAllGastos", psEmail);
+        if (psEmail) {
+            console.log("Del getAllGastos. if --> ", psEmail)
+            lsWhere = ' WHERE U."email" = ' + "'" + psEmail + "'" 
+            
+            const resultados = await pool.query('SELECT ' + 
+                    ' GT."id", U."email", GT."importe",  GT."tipoGastoId", ' +
+                    ' Tipo."nomTipoGasto",  ' + 
+                    ' GT."fechaGasto", GT."userId" ' + 
+                ' FROM "Gastos" AS GT ' + 
+                ' JOIN "User" AS  U ON GT."userId" = U."id" ' +
+                ' JOIN "TipoGasto" AS Tipo ON GT."tipoGastoId" = Tipo."id" ' +
+                lsWhere + 
+                ' ORDER BY gt."fechaGasto" ' );
+        
+            // console.log( resultados.rows);
+            return resultados.rows
+        }else {
+            //-->  con prisma --> andando ok PERO sin filtro por mail
+            const allGastos = await prisma.Gastos.findMany()
+            return allGastos
+        }
+
+
     } catch (error) {
         console.log(error);
         throw new Error(error);
@@ -84,6 +118,7 @@ const getSumaDeGastosPorUsuario = async () => {
         })
         console.log(fd)
         return {"Suma de Gastos del Período por Usuario: ": fd  }
+
     } catch (error) {
         console.log(error);
         throw new Error(error);
@@ -105,6 +140,34 @@ const getSumaDeGastosPorTipoGasto = async () => {
         throw new Error(error);
     }   
 }
+
+const getSumaDeGastosPorTipoGastoSql = async () => {
+    try {
+
+        //DERECHO CON SQL
+        //Pruebas de acercamiento que funcionan:
+        // const resultados = await pool.query('SELECT * FROM Public."Gastos" as G ');
+        // const resultados = await pool.query('SELECT G.id  FROM Public."Gastos" as G ');
+        // const resultados = await pool.query('SELECT Public."Gastos".id FROM Public."Gastos" ');
+        // const resultados = await pool.query('SELECT GT.id,  GT.*  FROM Public."Gastos" as GT ');
+        
+        //Finalmente tiro sql necesario
+        const resultados = await pool.query(
+            'SELECT max(TG."id") AS IdTipoGasto, max(TG."nomTipoGasto") AS TipoGasto, Sum(G."importe") AS SumOfimporte ' +
+            'FROM Public."Gastos" AS G,  Public."TipoGasto" AS TG ' +
+            'WHERE G."tipoGastoId" = TG."id" ' +
+            'GROUP BY G."tipoGastoId", TG."id" ' +
+            'ORDER BY TG."id" ')
+
+         // console.log( resultados.rows);
+        return resultados.rows
+    
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
+    }   
+}
+
 
 const getMayorDeAllGastos = async () => {
     try {
@@ -150,6 +213,7 @@ module.exports = {
     getSumaDeAllGastos,
     getSumaDeGastosPorUsuario,
     getSumaDeGastosPorTipoGasto,
+    getSumaDeGastosPorTipoGastoSql,
     getMayorDeAllGastos,
     getMenorDeAllGastos,
 }
