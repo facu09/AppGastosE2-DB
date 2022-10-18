@@ -1,4 +1,5 @@
 //Controlador Users - Independiente de con que DB esté hecho
+// ver de poner nombres variables en minuscula
 const Gasto = require("../models/gasto");  // este es el que impacta y conoce la DB
 const TipoGasto = require("../models/tipoGasto");
 const User = require("../models/user");
@@ -10,6 +11,7 @@ const createGasto = async (req, res, next) => {
     const idTipoGasto = req.body.idTipoGasto;
     const idUser = req.body.UserId;
 
+    // bien los nombre para validar, no hace falta aclarar que estas viendo con un comentario
     if (!nomGastoIsValid(nomGasto)) {
         res.statusCode = 400;
         res.send("nomGasto can not be empty.");
@@ -82,13 +84,8 @@ const idTipoGastoExists = async (id) => {
 const userAlreadyExists = async (idUser) => {
     const userFinded = await User.findByIdUser(idUser);
     console.log("user encontrado idUser:", userFinded)
-    if (userFinded) {
-        console.log("Sale x encontrado idUser: true")
-        return true
-    }else {
-        console.log("Sale x encontrado idUser: false")
-        return false
-    }
+    // poderias directamente devolverlo, o asi para que ya sea un booleano
+    return userFinded !== null;
 };
 
 const nomGastoIsValid = (nomGasto) => {
