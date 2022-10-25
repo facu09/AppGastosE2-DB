@@ -1,3 +1,4 @@
+require('dotenv').config(); //es para poder usar el Process.env
 const express = require("express");
 const bodyParser= require("body-parser");
 
