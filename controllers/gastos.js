@@ -1,8 +1,8 @@
 //Controlador Users - Independiente de con que DB esté hecho
 // ver de poner nombres variables en minuscula
-const Gasto = require("../models/gasto");  // este es el que impacta y conoce la DB
-const TipoGasto = require("../models/tipoGasto");
-const User = require("../models/user");
+const gasto = require("../models/gasto");  // este es el que impacta y conoce la DB
+const tipoGasto = require("../models/tipoGasto");
+const user = require("../models/user");
 
 const createGasto = async (req, res, next) => {
     const nomGasto = req.body.nomGasto;
@@ -32,7 +32,7 @@ const createGasto = async (req, res, next) => {
         res.send("The userId is not valid.");
         return;
     }
-    if (await Gasto.GastoAlreadyExist( nomGasto,
+    if (await gasto.GastoAlreadyExist( nomGasto,
                 importe, fechaGasto, idTipoGasto, idUser)) {
         res.statusCode = 402;
         res.send("Este Gasto ya fue cargado.");
@@ -44,7 +44,7 @@ const createGasto = async (req, res, next) => {
 
    // falta otras validarciones
     // Creo la entidad
-    let newGasto = new Gasto(
+    let newGasto = new gasto(
         req.body.nomGasto,
         req.body.importe,
         req.body.fechaGasto, 
@@ -64,14 +64,14 @@ const createGasto = async (req, res, next) => {
 };
 
 const getAllGastos = async (req, res, next) => {
-    const gastos = await Gasto.getAllGastos();
+    const gastos = await gasto.getAllGastos();
     // console.log("Response user", users);
     res.send(gastos)
 }
 
 // Validaciones ----------------------------------------
 const idTipoGastoExists = async (id) => {
-    const tipoGastoById = await TipoGasto.findById(id);
+    const tipoGastoById = await tipoGasto.findById(id);
     console.log ("Encontrado  tipo gasto", tipoGastoById)
     if (tipoGastoById) {
         console.log ("Sale por true")
@@ -82,7 +82,7 @@ const idTipoGastoExists = async (id) => {
     } 
 }
 const userAlreadyExists = async (idUser) => {
-    const userFinded = await User.findByIdUser(idUser);
+    const userFinded = await user.findByIdUser(idUser);
     console.log("user encontrado idUser:", userFinded)
     // poderias directamente devolverlo, o asi para que ya sea un booleano
     return userFinded !== null;

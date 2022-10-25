@@ -1,5 +1,5 @@
 //Controlador Users - Independiente de con que DB esté hecho
-const TipoGasto = require("../models/tipoGasto");  // este es el que impacta y conoce la DB
+const tipoGasto = require("../models/tipoGasto");  // este es el que impacta y conoce la DB
 
 const createTipoGasto = async (req, res, next) => {
     const nomTipoGasto = req.body.nomTipoGasto;
@@ -14,7 +14,7 @@ const createTipoGasto = async (req, res, next) => {
    
    
     // Creo la entidad
-    let newTipoGasto = new TipoGasto(
+    let newTipoGasto = new tipoGasto(
         req.body.nomTipoGasto
     );
     console.log("paso por aca despues de crear new instance")
@@ -30,7 +30,7 @@ const createTipoGasto = async (req, res, next) => {
 };
 
 const getAllTiposGasto = async (req, res, next) => {
-    const tiposGasto  = await TipoGasto.getAllTiposGasto();
+    const tiposGasto  = await tipoGasto.getAllTiposGasto();
     // console.log("Response user", users);
     res.send(tiposGasto)
 };
@@ -56,7 +56,7 @@ const updateById = async (req, res, next) => {
         return;
     };
 
-    const tipoGastoUpdated = await TipoGasto.uptadeById(req.params.id, nomTipoGasto );
+    const tipoGastoUpdated = await tipoGasto.uptadeById(req.params.id, nomTipoGasto );
 
     res.send(tipoGastoUpdated);  
 }
@@ -65,7 +65,7 @@ const updateById = async (req, res, next) => {
 // Validaciones
 
 const idDosentExist = async (id) => {
-    const tipoGastoById = await TipoGasto.findById(id);
+    const tipoGastoById = await tipoGasto.findById(id);
     console.log ("Encontrado ", tipoGastoById)
     if (tipoGastoById) {
         return false

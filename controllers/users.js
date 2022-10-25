@@ -1,5 +1,5 @@
 //Controlador Users - Independiente de con que DB esté hecho
-const User = require("../models/user");  // este es el que impacta y conoce la DB
+const user = require("../models/user");  // este es el que impacta y conoce la DB
 
 //Armo el CRUD de Usuarios (Create, Read, Update, Delete )
 
@@ -39,7 +39,7 @@ const createUser = async (req, res, next) => {
 
   
     // Si llego acá es que valido bien ==> Creo la entidad
-    let newUser = new User(
+    let newUser = new user(
         req.body.email,
         req.body.name,
         req.body.password,
@@ -57,7 +57,7 @@ const createUser = async (req, res, next) => {
 };
 
 const getAllUsers = async (req, res, next) => {
-    const users = await User.getAllUsers();
+    const users = await user.getAllUsers();
     // console.log("Response user", users);
     res.send(users)
 }
@@ -78,7 +78,7 @@ const findUserByEmail = async (req, res, next) => {
     // console.log("Email ingresado por req.query.email", req.query.email)
     // console.log("Name por req.query.name", req.query.name)
 
-    const users = await User.findByEmail(req.query.email);
+    const users = await user.findByEmail(req.query.email);
    
     console.log("Response user", users);
     res.send(users)
@@ -118,7 +118,7 @@ const updateByEmail = async (req, res, next) => {
         return;
     };
 
-    const userUpdated = await User.uptadeByEmail(req.params.email, name, password, role );
+    const userUpdated = await user.uptadeByEmail(req.params.email, name, password, role );
 
     res.send(userUpdated);
 }
@@ -137,7 +137,7 @@ const deleteByEmail = async(req, res, next) => {
         res.send("User with this eamil dosen't exist.");
         return;
     };
-    const userDeleted = await User.deleteByEmail(req.params.email);
+    const userDeleted = await user.deleteByEmail(req.params.email);
     res.send(userDeleted);  
 }
 
@@ -158,7 +158,7 @@ const roleIsValid = (role) => {
 };
 
 const userAlreadyExists = async (email) => {
-    const userByEmail = await User.findByEmail(email);
+    const userByEmail = await user.findByEmail(email);
     // console.log("user encontrado:", userByEamil)
     if (userByEmail) {
         return true
@@ -169,7 +169,7 @@ const userAlreadyExists = async (email) => {
 
 const userDosentExist = async (email) => {
     console.log ("---> Entro al userDosentExist")
-    const userByEmail = await User.findByEmail(email);
+    const userByEmail = await user.findByEmail(email);
     console.log(userByEmail) ;
     if (userByEmail) {
         return false
