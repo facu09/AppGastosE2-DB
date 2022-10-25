@@ -1,9 +1,6 @@
 const prisma = require("../utils/client");
 const pool = require("../utils/clientPostgreSQL")
-
-
-const { v4: uuidv4 } = require("uuid");
-
+// veo que probaste hacerlo con SQL, esta bueno pero te habras dado cuenta lo practico que es usar prisma
 const getAllGastos = async (psEmail) => {
     try {
         //-->  con prisma --> andando ok PERO sin filtro por mail

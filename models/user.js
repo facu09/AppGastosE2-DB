@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 
 class User {
   constructor(email, name, password, role, id) {
+    // ell uuid te hace falta por algo? si lo envias a la db sin ID te lo genera no nnecesitarias tenerlo al principio no?
     this.id = id ? id : uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
     this.email = email;
     this.name = name ? name : "";  //si fuese opcional
